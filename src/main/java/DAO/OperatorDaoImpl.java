@@ -121,6 +121,10 @@ public class OperatorDaoImpl implements OperatorDao{
         } catch (SQLException e) {
             System.out.println("OOPs error occured in connecting database " + e.getMessage());
             return false;
+        } finally {
+            JDBCHelper.close(rs);
+            JDBCHelper.close(ps);
+            JDBCHelper.close(con);
         }
     }
 }

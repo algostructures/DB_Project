@@ -11,4 +11,5 @@ public interface VehicleDao {
     public List<Vehicle> getAllVehicles();
     public boolean addVehicle(Vehicle vehicle);
     public boolean removeVehicles(String model, int number);
+    public Vehicle findVehicle(String model);
 }
