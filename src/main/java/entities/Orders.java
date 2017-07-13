@@ -8,16 +8,18 @@ import java.util.Date;
 public class Orders {
     String orderedBy;
     String orderId;
-    String vehicleOrSpare;
+    String vehiclemodel;
+    String sparePart;
     int numbers;
     double price;
     double tax;
     Date date;
 
-    public Orders(String orderedBy, String orderId, String vehicleOrSpare, int numbers, double price, double tax, Date date) {
+    public Orders(String orderedBy, String orderId, String vehiclemodel, String sparePart, int numbers, double price, double tax, Date date) {
         this.orderedBy = orderedBy;
         this.orderId = orderId;
-        this.vehicleOrSpare = vehicleOrSpare;
+        this.vehiclemodel = vehiclemodel;
+        this.sparePart = sparePart;
         this.numbers = numbers;
         this.price = price;
         this.tax = tax;
@@ -40,12 +42,20 @@ public class Orders {
         this.orderId = orderId;
     }
 
-    public String getVehicleOrSpare() {
-        return this.vehicleOrSpare;
+    public String getVehiclemodel() {
+        return vehiclemodel;
     }
 
-    public void setVehicleOrSpare(String vehicleOrSpare) {
-        this.vehicleOrSpare = vehicleOrSpare;
+    public void setVehiclemodel(String vehiclemodel) {
+        this.vehiclemodel = vehiclemodel;
+    }
+
+    public String getSparePart() {
+        return sparePart;
+    }
+
+    public void setSparePart(String sparePart) {
+        this.sparePart = sparePart;
     }
 
     public int getNumbers() {
