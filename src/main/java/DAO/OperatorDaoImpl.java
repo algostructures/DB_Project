@@ -58,8 +58,9 @@ public class OperatorDaoImpl implements OperatorDao{
             ps.setString(1, o.getUserName());
             ps.setString(2,o.getName());
             ps.setString(3,o.getPassword());
-            ps.setString(4, String.valueOf(o.isBlocked()));
-
+            ps.setBoolean(4, o.isBlocked());
+            ps.executeUpdate();
+            con.commit();
             return true;
         } catch (SQLException e) {
             System.out.println("OOPs error occured in connecting database " + e.getMessage());
@@ -73,11 +74,53 @@ public class OperatorDaoImpl implements OperatorDao{
     }
 
     public boolean blockOperator(String username) {
-
-        return false;
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = JDBCHelper.getConnection();
+            con.setAutoCommit(false);
+            String sql = "update Operators set blocked = ? where username = ?";
+            ps = con.prepareStatement(sql);
+            ps.setBoolean(1, false);
+            ps.setString(2, username);
+            ps.executeUpdate();
+            con.commit();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("OOPs error occured in connecting database " + e.getMessage());
+            return false;
+        }
+        finally {
+            JDBCHelper.close(rs);
+            JDBCHelper.close(ps);
+            JDBCHelper.close(con);
+        }
     }
 
     public boolean validate(String username, String password) {
-        return false;
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = JDBCHelper.getConnection();
+            String sql = "select * from operators where (username = ? && password == ? && blocked = ?)";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ps.setBoolean(3, true);
+            ps.executeUpdate();
+            rs = ps.executeQuery();
+            if(rs.next()){
+                return true;
+            }
+            else{
+                return false;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("OOPs error occured in connecting database " + e.getMessage());
+            return false;
+        }
     }
 }

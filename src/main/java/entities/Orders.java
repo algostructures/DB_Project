@@ -8,22 +8,41 @@ import java.util.Date;
 public class Orders {
     String orderedBy;
     String orderId;
-    String vehiclemodel;
+    String vehicleModel;
     String sparePart;
+    String operation;
     int numbers;
     double price;
     double tax;
     Date date;
 
-    public Orders(String orderedBy, String orderId, String vehiclemodel, String sparePart, int numbers, double price, double tax, Date date) {
+
+    public Orders(String orderedBy, String orderId, String vehicleModel, String sparePart, String operation, int numbers, double price, double tax, Date date) {
         this.orderedBy = orderedBy;
         this.orderId = orderId;
-        this.vehiclemodel = vehiclemodel;
+        this.vehicleModel = vehicleModel;
         this.sparePart = sparePart;
+        this.operation = operation;
         this.numbers = numbers;
         this.price = price;
         this.tax = tax;
         this.date = date;
+    }
+
+    public String getVehicleModel() {
+        return vehicleModel;
+    }
+
+    public void setVehicleModel(String vehicleModel) {
+        this.vehicleModel = vehicleModel;
+    }
+
+    public String getOperation() {
+        return operation;
+    }
+
+    public void setOperation(String operation) {
+        this.operation = operation;
     }
 
     public String getOrderedBy() {
@@ -43,11 +62,11 @@ public class Orders {
     }
 
     public String getVehiclemodel() {
-        return vehiclemodel;
+        return vehicleModel;
     }
 
     public void setVehiclemodel(String vehiclemodel) {
-        this.vehiclemodel = vehiclemodel;
+        this.vehicleModel = vehiclemodel;
     }
 
     public String getSparePart() {
