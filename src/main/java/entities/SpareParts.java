@@ -4,26 +4,20 @@ package entities;
  * Created by prajapas on 7/13/2017.
  */
 public class SpareParts {
-    private String vehicle_model;
     private String sparepart_ID;
+    private String sparepartName;
+    private String vehicle_model;
     private double price;
     private double tax;
     private int numbers;
 
-    public SpareParts(String vehicle_model, String sparepart_ID, double price, double tax, int numbers) {
-        this.vehicle_model = vehicle_model;
+    public SpareParts(String sparepart_ID, String sparepartName, String vehicle_model, double price, double tax, int numbers) {
         this.sparepart_ID = sparepart_ID;
+        this.sparepartName = sparepartName;
+        this.vehicle_model = vehicle_model;
         this.price = price;
         this.tax = tax;
         this.numbers = numbers;
-    }
-
-    public String getVehicle_model() {
-        return vehicle_model;
-    }
-
-    public void setVehicle_model(String vehicle_model) {
-        this.vehicle_model = vehicle_model;
     }
 
     public String getSparepart_ID() {
@@ -32,6 +26,22 @@ public class SpareParts {
 
     public void setSparepart_ID(String sparepart_ID) {
         this.sparepart_ID = sparepart_ID;
+    }
+
+    public String getSparepartName() {
+        return sparepartName;
+    }
+
+    public void setSparepartName(String sparepartName) {
+        this.sparepartName = sparepartName;
+    }
+
+    public String getVehicle_model() {
+        return vehicle_model;
+    }
+
+    public void setVehicle_model(String vehicle_model) {
+        this.vehicle_model = vehicle_model;
     }
 
     public double getPrice() {

@@ -9,40 +9,25 @@ public class Orders {
     String orderedBy;
     String orderId;
     String vehicleModel;
-    String sparePart;
+    String sparePartId;
+    String sparePartName;
     String operation;
     int numbers;
     double price;
     double tax;
     Date date;
 
-
-    public Orders(String orderedBy, String orderId, String vehicleModel, String sparePart, String operation, int numbers, double price, double tax, Date date) {
+    public Orders(String orderedBy, String orderId, String vehicleModel, String sparePartId, String sparePartName, String operation, int numbers, double price, double tax, Date date) {
         this.orderedBy = orderedBy;
         this.orderId = orderId;
         this.vehicleModel = vehicleModel;
-        this.sparePart = sparePart;
+        this.sparePartId = sparePartId;
+        this.sparePartName = sparePartName;
         this.operation = operation;
         this.numbers = numbers;
         this.price = price;
         this.tax = tax;
         this.date = date;
-    }
-
-    public String getVehicleModel() {
-        return vehicleModel;
-    }
-
-    public void setVehicleModel(String vehicleModel) {
-        this.vehicleModel = vehicleModel;
-    }
-
-    public String getOperation() {
-        return operation;
-    }
-
-    public void setOperation(String operation) {
-        this.operation = operation;
     }
 
     public String getOrderedBy() {
@@ -61,20 +46,36 @@ public class Orders {
         this.orderId = orderId;
     }
 
-    public String getVehiclemodel() {
+    public String getVehicleModel() {
         return vehicleModel;
     }
 
-    public void setVehiclemodel(String vehiclemodel) {
-        this.vehicleModel = vehiclemodel;
+    public void setVehicleModel(String vehicleModel) {
+        this.vehicleModel = vehicleModel;
     }
 
-    public String getSparePart() {
-        return sparePart;
+    public String getSparePartId() {
+        return sparePartId;
     }
 
-    public void setSparePart(String sparePart) {
-        this.sparePart = sparePart;
+    public void setSparePartId(String sparePartId) {
+        this.sparePartId = sparePartId;
+    }
+
+    public String getSparePartName() {
+        return sparePartName;
+    }
+
+    public void setSparePartName(String sparePartName) {
+        this.sparePartName = sparePartName;
+    }
+
+    public String getOperation() {
+        return operation;
+    }
+
+    public void setOperation(String operation) {
+        this.operation = operation;
     }
 
     public int getNumbers() {

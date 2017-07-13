@@ -28,9 +28,9 @@ public class OrderDaoImpl implements OrderDao {
             ps.execute();
             rs = ps.getResultSet();
             while(rs.next()){
-                Orders or = new Orders(rs.getString("1"),rs.getString(2), rs.getString(3),
-                        rs.getString(4),rs.getString(5), rs.getInt(6), rs.getDouble(7),
-                        rs.getDouble(8), new SimpleDateFormat("dd/MM/yyyy").parse(rs.getString(9)));
+                Orders or = new Orders(rs.getString("who"),rs.getString("id"), rs.getString("vevhile_model"),
+                        rs.getString("sparepartid"),rs.getString("sparepartname"), rs.getString("operation"),rs.getInt("unit"), rs.getDouble("price"),
+                        rs.getDouble("tax"), new SimpleDateFormat("dd/MM/yyyy").parse(rs.getString("date")));
                 OrderList.add(or);
             }
             return OrderList;
@@ -59,11 +59,11 @@ public class OrderDaoImpl implements OrderDao {
             ps.execute();
             rs = ps.getResultSet();
             while(rs.next()){
-                Date tempDate = new SimpleDateFormat("dd/MM/yyyy").parse(rs.getString(9));
+                Date tempDate = new SimpleDateFormat("dd/MM/yyyy").parse(rs.getString("date"));
                 if(tempDate.after(from) && tempDate.before(to)) {
-                    Orders or = new Orders(rs.getString("1"), rs.getString(2), rs.getString(3),
-                            rs.getString(4), rs.getString(5), rs.getInt(6), rs.getDouble(7),
-                            rs.getDouble(8), new SimpleDateFormat("dd/MM/yyyy").parse(rs.getString(9)));
+                    Orders or = new Orders(rs.getString("who"),rs.getString("id"), rs.getString("vevhile_model"),
+                            rs.getString("sparepartid"),rs.getString("sparepartname"), rs.getString("operation"),rs.getInt("unit"), rs.getDouble("price"),
+                            rs.getDouble("tax"), new SimpleDateFormat("dd/MM/yyyy").parse(rs.getString("date")));
                     OrderList.add(or);
                 }
             }
@@ -88,25 +88,26 @@ public class OrderDaoImpl implements OrderDao {
         try{
             con = JDBCHelper.getConnection();
             con.setAutoCommit(false);
-            String sql = "insert into orders values (?,?,?,?,?,?,?,?,?)";
+            String sql = "insert into orders values (?,?,?,?,?,?,?,?,?,?)";
             ps = con.prepareStatement(sql);
-            ps.setString(1,order.getOrderedBy());
-            ps.setString(2, order.getOrderId());
+            ps.setString(2,order.getOrderedBy());
+            ps.setString(1, order.getOrderId());
             ps.setString(3, order.getVehicleModel());
-            ps.setString(4, order.getSparePart());
-            ps.setString(5, order.getOperation());
+            ps.setString(9, order.getSparePartId());
+            ps.setString(4, order.getOperation());
             ps.setInt(6, order.getNumbers());
             ps.setDouble(7, order.getPrice());
             ps.setDouble(8, order.getTax());
-            ps.setString(9, order.getDate().toString());
+            ps.setString(5, order.getDate().toString());
+            ps.setString(10, order.getSparePartName());
             ps.executeUpdate();
-            if(order.getSparePart().length() == 0){
+            if(order.getSparePartId().length() == 0){
                 Vehicle vehicle = new Vehicle(order.getVehicleModel(), order.getNumbers(), order.getPrice(), order.getTax());
                 VehicleDaoImpl vd = new VehicleDaoImpl();
                 vd.addVehicle(vehicle);
             }
             else{
-                SpareParts spareParts = new SpareParts(order.getVehicleModel(), order.getSparePart(), order.getPrice(), order.getTax(), order.getNumbers());
+                SpareParts spareParts = new SpareParts(order.getSparePartId(), order.getSparePartName(), order.getVehicleModel(), order.getPrice(), order.getTax(), order.getNumbers());
                 SparePartsDaoImpl sp = new SparePartsDaoImpl();
                 sp.addSparePart(spareParts);
             }
