@@ -1,5 +1,7 @@
 package entities;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -28,6 +30,22 @@ public class Orders {
         this.price = price;
         this.tax = tax;
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "orderedBy='" + orderedBy + '\'' +
+                ", orderId='" + orderId + '\'' +
+                ", vehicleModel='" + vehicleModel + '\'' +
+                ", sparePartId='" + sparePartId + '\'' +
+                ", sparePartName='" + sparePartName + '\'' +
+                ", operation='" + operation + '\'' +
+                ", numbers=" + numbers +
+                ", price=" + price +
+                ", tax=" + tax +
+                ", date=" + date +
+                "}\n";
     }
 
     public String getOrderedBy() {
@@ -102,8 +120,11 @@ public class Orders {
         this.tax = tax;
     }
 
-    public Date getDate() {
-        return date;
+    public String getDate() {
+
+        DateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+        String s  = df.format(date);
+        return s;
     }
 
     public void setDate(Date date) {

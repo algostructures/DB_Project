@@ -8,6 +8,7 @@ import entities.Vehicle;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class OrderDaoImpl implements OrderDao {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        List<Orders> OrderList = null;
+        List<Orders> OrderList = new ArrayList<Orders>();
         try{
             con = JDBCHelper.getConnection();
             String sql = "select * from orders";
@@ -61,9 +62,10 @@ public class OrderDaoImpl implements OrderDao {
             while(rs.next()){
                 Date tempDate = new SimpleDateFormat("dd/MM/yyyy").parse(rs.getString("date"));
                 if(tempDate.after(from) && tempDate.before(to)) {
-                    Orders or = new Orders(rs.getString("who"),rs.getString("id"), rs.getString("vevhile_model"),
-                            rs.getString("sparepartid"),rs.getString("sparepartname"), rs.getString("operation"),rs.getInt("unit"), rs.getDouble("price"),
-                            rs.getDouble("tax"), new SimpleDateFormat("dd/MM/yyyy").parse(rs.getString("date")));
+                    Orders or = new Orders(rs.getString("who"),rs.getString("id"), rs.getString("vechile_model"),
+                            rs.getString("sparepartid"),rs.getString("sparepartname"), rs.getString("operation"),rs.getInt("unit"),
+                            rs.getDouble("price"), rs.getDouble("tax"), new SimpleDateFormat("dd/MM/yyyy").parse(rs.getString("date")));
+                    //System.out.println(or);
                     OrderList.add(or);
                 }
             }
@@ -98,10 +100,11 @@ public class OrderDaoImpl implements OrderDao {
             ps.setInt(6, order.getNumbers());
             ps.setDouble(7, order.getPrice());
             ps.setDouble(8, order.getTax());
-            ps.setString(5, order.getDate().toString());
+            //System.out.print(order.getDate().toString());
+            ps.setString(5, order.getDate());
             ps.setString(10, order.getSparePartName());
             ps.executeUpdate();
-            if(order.getSparePartId().length() == 0){
+            if(order.getSparePartId().equals("null")){
                 Vehicle vehicle = new Vehicle(order.getVehicleModel(), order.getNumbers(), order.getPrice(), order.getTax());
                 VehicleDaoImpl vd = new VehicleDaoImpl();
                 vd.addVehicle(vehicle);

@@ -21,7 +21,7 @@ public class OperatorDaoImpl implements OperatorDao{
         List<Operator> operatorList = null;
         try{
             con = JDBCHelper.getConnection();
-            String sql = "select * from operator";
+            String sql = "select * from operators";
             ps = con.prepareStatement(sql);
             ps.execute();
             rs = ps.getResultSet();
@@ -30,7 +30,7 @@ public class OperatorDaoImpl implements OperatorDao{
             operatorList = new ArrayList<Operator>();
 
             while(rs.next()) {
-                op = new Operator(rs.getString("userName"), rs.getString("name"), rs.getString("password"), rs.getBoolean("blocked"));
+                op = new Operator(rs.getString("userName"), rs.getString("password"), rs.getBoolean("blocked"));
                 operatorList.add(op);
             }
             return operatorList;
@@ -53,12 +53,11 @@ public class OperatorDaoImpl implements OperatorDao{
             con = JDBCHelper.getConnection();
             con.setAutoCommit(false);
 
-            String sql = "insert into Operator(userName, name, password, blocked) values (?,?,?,?)";
+            String sql = "insert into Operators(userName, password, blocked) values (?,?,?)";
             ps = con.prepareStatement(sql);
             ps.setString(1, o.getUserName());
-            ps.setString(2,o.getName());
-            ps.setString(3,o.getPassword());
-            ps.setBoolean(4, o.isBlocked());
+            ps.setString(2,o.getPassword());
+            ps.setBoolean(3, o.isBlocked());
             ps.executeUpdate();
             con.commit();
             return true;
@@ -104,13 +103,13 @@ public class OperatorDaoImpl implements OperatorDao{
         ResultSet rs = null;
         try {
             con = JDBCHelper.getConnection();
-            String sql = "select * from operators where (username = ? && password == ? && blocked = ?)";
+            String sql = "select * from operators where (username = ? && password = ? && blocked = ?)";
             ps = con.prepareStatement(sql);
             ps.setString(1, username);
             ps.setString(2, password);
             ps.setBoolean(3, true);
-            ps.executeUpdate();
-            rs = ps.executeQuery();
+            ps.execute();
+            rs = ps.getResultSet();
             if(rs.next()){
                 return true;
             }
@@ -119,7 +118,7 @@ public class OperatorDaoImpl implements OperatorDao{
             }
 
         } catch (SQLException e) {
-            System.out.println("OOPs error occured in connecting database " + e.getMessage());
+            System.out.println("OOPs error occured in connecting database  " + e.getMessage());
             return false;
         } finally {
             JDBCHelper.close(rs);

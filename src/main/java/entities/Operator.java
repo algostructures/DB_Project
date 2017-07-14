@@ -5,13 +5,11 @@ package entities;
  */
 public class Operator {
     String userName;
-    String name;
     private String password;
     private boolean blocked;
 
-    public Operator(String userName, String name, String password, boolean blocked) {
+    public Operator(String userName, String password, boolean blocked) {
         this.userName = userName;
-        this.name = name;
         this.password = password;
         this.blocked = blocked;
     }
@@ -22,14 +20,6 @@ public class Operator {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getPassword() {

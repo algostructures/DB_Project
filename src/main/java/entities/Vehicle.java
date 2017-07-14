@@ -16,6 +16,15 @@ public class Vehicle {
         this.tax = tax;
     }
 
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "vehicle_model='" + vehicle_model + '\'' +
+                ", number=" + number +
+                ", price=" + price +
+                ", tax=" + tax +
+                "}\n";
+    }
 
     public String getVehicle_model() {
         return vehicle_model;

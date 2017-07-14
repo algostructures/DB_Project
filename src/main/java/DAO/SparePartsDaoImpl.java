@@ -65,7 +65,7 @@ public class SparePartsDaoImpl implements SparePartsDao{
                 double price = sp.getPrice();
                 double tax = sp.getTax();
                 double units = sp.getNumbers();
-                String sql = "update spareparts set price = ?, tax = ?, units = ? where sparepasrtId = ?";
+                String sql = "update spareparts set price = ?, tax = ?, units = ? where sparepartId = ?";
                 ps = con.prepareStatement(sql);
                 ps.setDouble(1, sp.getPrice()+sparePart.getPrice());
                 ps.setDouble(2, sp.getTax()+sparePart.getTax());
